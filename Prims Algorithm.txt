@@ -1,0 +1,127 @@
+#includestdio.h
+#includestdlib.h
+ 
+#define Lim 10
+ 
+int H[Lim][Lim],span[Lim][Lim],n;
+ 
+int prims();
+int main()
+{
+    system(CLS);
+	menu();
+ 
+	return 0;
+}
+ 
+int prims()
+{
+	int cost[Lim][Lim];……………… …………………………………………...…O(1)
+	int u,v,min_distance,to[Lim],from[Lim],visited[Lim],edges,i,min_cost,j; ...…...O(1)
+ 
+ 
+	for(i=0;in;i++)……………………………………………………..………..…O(N)
+		for(j=0;jn;j++) ……………………………………………….…..… O(N)
+		{
+			if(H[i][j]==0) ……………………………………………..…O(1)
+				cost[i][j]=9999; ………………………...…………O(1)
+			else
+				cost[i][j]=H[i][j]; ………………………………….O(1)
+				span[i][j]=0; …………………………...….………O(1)
+		}
+	to[0]=0; ……………………………………………………………….…………O(1)
+	visited[0]=1; ………………………………………………………….…………O(1)
+ 
+	for(i=1;in;i++)………………………………………………………………... O(N)
+	{
+		to[i]=cost[0][i]; ……………………………………………..…………O(1)
+		from[i]=0; ………………………………………………………..……O(1)
+		visited[i]=0; ………………………………………………...…………O(1)
+	}
+ 
+	min_cost=0; ……………………………………………………………..………O(1)
+	edges=n-1; ………………………………………………………………………O(1)
+ 
+	while(edges0) …………………………………………………………………O(N)
+	{
+		find the vertex at minimum distance from the tree
+		min_distance=9999; …………………………………………………..O(1)
+		for(i=1;in;i++)…………………………………………………………………O(N)
+			if(visited[i]==0&&to[i]min_distance)…………….………O(1)	
+			{
+				v=i; …………………………………………..……O(1)
+				min_distance=to[i]; …………………………….…O(1)
+			}
+ 
+		u=from[v]; …………………………………………………….………O(1)
+ 
+		span[u][v]=to[v]; ……………………………………………………...O(1)
+		span[v][u]=to[v]; …………………………………………………...…O(1)
+		edges--;………………………………………………………………...O(1)
+		visited[v]=1; ………………………………………………………..…O(1)
+ 
+		for(i=1;in;i++)……………………………………………………… O(N)
+			if(visited[i]==0&&cost[i][v]to[i]) ………………………...O(1)
+			{
+				to[i]=cost[i][v]; ………………………………...…O(1)
+				from[i]=v; ……………………………………...…O(1)
+			}
+		min_cost=min_cost+cost[u][v]; ………………………………………O(1)
+	}
+	return(min_cost); ……………………………………………………………..…O(1)
+}
+ 
+int menu(){
+	int lr;
+	printf(--------------Main Menu-----------------n);………………………………O(1)
+	printf(1) Find Least Resourcesn);……………………………………………O(1)
+	printf(2) Exitn);………………………………………………………….……O(1)
+	scanf(%d,&lr); …………………………………………………………...……O(1)
+	switch(lr){ ……………………………………………………………….………O(1)
+ 
+		case 1 …………………………………….………….……………..…O(1)
+            system(CLS);…………………………………………………………….………O(1)
+			start();………………………………………………......……O(1)
+			break; ………………………………………………..………O(1)
+		case 2
+			exit(1); ………………………………………………………O(1)
+			break; ……………………………………………………..…O(1)
+		default
+			printf(Option not listedn);……………………………...…O(1)
+			break; ………………………………………………………..O(1)
+	}
+ 
+ 
+}
+ 
+int start(){
+    int i,j,total_MST; …………………………………………………………………….…O(1)
+	printf(Enter Number of houses); …………………………………………..…O(1)
+	scanf(%d,&n); ……………………………………………………………...…O(1)
+	printf(nEnter the location table); ………………………………………….…O(1)
+ 
+	for(i=0;in;i++)…………………………………………………………………O(N)
+		for(j=0;jn;j++)…………………………………………………….…O(N)
+			scanf(%d,&H[i][j]); ………………………………………O(1)
+ 
+	total_MST=prims();……………………………………………………………O(N2)
+	printf(Minimum spanning tree tablen);………………………………………O(1)
+	printf(House 1);………………………………………………………………..O(1)
+	printf( House 2t);…………………………………………………………...…O(1)
+	printf(House 3);…………………………………………………………..……O(1)
+	printf(tHouse 4);………………………………………………………………O(1)
+	printf(tHouse 5);………………………………………………………………O(1)
+	printf(tHouse 6);………………………………………………………………O(1)
+	for(i=0;in;i++)…………………………………………………………………O(N)
+	{
+ 
+		printf(n);………………………………………………………….…O(1)
+		for(j=0;jn;j++)…………………………………………………….…O(N)
+			printf(%dt,span[i][j]); ……………………………………O(1)
+	}
+ 
+	printf(nnTotal cost of the MST=%dn,total_MST); …………………………O(1)
+	system(Pausen);…………………………………………………………….…O(1)
+	system(CLS);………………………………………………………………..…O(1)
+	menu();…..…………………………………………………………………..…O(N2)
+}
