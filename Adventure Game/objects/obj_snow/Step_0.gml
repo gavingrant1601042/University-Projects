@@ -1,0 +1,1 @@
+  effect_create_above(ef_snow, 0, 0, 1, c_gray);

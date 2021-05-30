@@ -1,0 +1,1 @@
+draw_text(489,23,"High Score:="+string(global.highscore));//draw value of global.highscore

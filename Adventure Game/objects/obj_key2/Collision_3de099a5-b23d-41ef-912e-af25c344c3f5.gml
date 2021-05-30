@@ -1,0 +1,2 @@
+instance_destroy(obj_door2)
+instance_destroy(obj_key2)
